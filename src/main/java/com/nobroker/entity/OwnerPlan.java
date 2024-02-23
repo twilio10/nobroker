@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 public class OwnerPlan {
 
     @Id
+
     private   long planId;
 
     @Column(name="plane_Name", unique = true)

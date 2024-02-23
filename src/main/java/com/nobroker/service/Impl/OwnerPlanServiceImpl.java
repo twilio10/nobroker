@@ -5,8 +5,10 @@ import com.nobroker.payload.OwnerPlanDto;
 import com.nobroker.repository.OwnerPlanRepository;
 import com.nobroker.service.OwnerPlanService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OwnerPlanServiceImpl implements OwnerPlanService {
@@ -26,6 +28,13 @@ public class OwnerPlanServiceImpl implements OwnerPlanService {
 
          return mapToDto(savedOwnerPlan);
 
+    }
+
+    @Override
+    public List<OwnerPlanDto> getOwnerPlan() {
+        List<OwnerPlan> ownerPlans = ownerPlanRepository.findAll();
+        List<OwnerPlanDto> ownerPlanDto = ownerPlans.stream().map(plan -> mapToDto(plan)).collect(Collectors.toList());
+        return ownerPlanDto;
     }
 
     OwnerPlan mapToEntity(OwnerPlanDto ownerPlanDto){
